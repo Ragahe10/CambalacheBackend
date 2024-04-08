@@ -2,21 +2,23 @@ const { response, request } = require('express');
 const Paquete = require('../models/paquete');
 
 const paquetesActivosGet = async (req=request, res=response) =>{
+    const data = req.query;
     const query = {estado: true};
 
-    const {total, paquetes} = await Promise.all([
+    const [total, paquetes] = await Promise.all([
         Paquete.countDocuments(query),
         Paquete.find(query)
     ]);
-
+    console.log(total)
     res.json({
-        mensaje: "Paquetes obtenidos",
+        mensaje: "Paquetes obtenidosss",
         total,
         paquetes
     });
 }
 const paquetesGet = async (req=request, res=response) =>{
-    const {total, paquetes} = await Promise.all([
+    const data = req.query;
+    const [total, paquetes] = await Promise.all([
         Paquete.countDocuments(),
         Paquete.find()
     ]);
@@ -46,8 +48,8 @@ const paquetePost = async (req=request, res=response) => {
         res.status(400).json({msg: `El nombre de paquete ya existe`});
     }
     // fin middlewares
-    const {nombre, descripcion, precio, productos} = req.body;
-    const paquete = new Paquete({nombre, descripcion, precio, productos});
+    const {nombre, descripcion, precio} = req.body;
+    const paquete = new Paquete({nombre, descripcion, precio});
 
     await paquete.save();
     

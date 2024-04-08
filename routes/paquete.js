@@ -1,10 +1,10 @@
-const { Router } = require('express');
+const express = require('express');
 const {paquetesActivosGet, paquetesGet, paqueteGet, paquetePost, paquetePut, paqueteDelete} = require('../controllers/paquete');
-const router = Router();
+const router = express.Router();
 
 //Rutas para CRUD
 
-router.get('/', paquetesActivosGet);
+router.get('/activos', paquetesActivosGet);
 
 router.get('/', paquetesGet);
 

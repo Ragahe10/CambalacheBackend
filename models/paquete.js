@@ -11,4 +11,4 @@ const PaqueteSchema = Schema({
     estado: {type: Boolean, default: true}
 });
 
-module.exports = model('Paquete', PaqueteSchema);
+module.exports = model('Paquete', PaqueteSchema); 
