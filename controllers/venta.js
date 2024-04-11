@@ -8,13 +8,13 @@ const ventaGet = async (req = request, res = response) => {
     const datos = req.query;
 
     // Agarramos solo los que estan disponibles
-    const query = { estado: true };
+    // const query = { estado: true };
 
 
     // Se cuentan los usuarios que cumplen la consulta y los trae con el find
     const [total, venta] = await Promise.all([
-        Venta.countDocuments(query),
-        Venta.find(query)
+        Venta.countDocuments(),
+        Venta.find()
     ])
 
     res.json({

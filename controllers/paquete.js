@@ -9,7 +9,7 @@ const paquetesActivosGet = async (req=request, res=response) =>{
         Paquete.countDocuments(query),
         Paquete.find(query)
     ]);
-    console.log(total)
+    
     res.json({
         mensaje: "Paquetes obtenidosss",
         total,
