@@ -8,22 +8,24 @@ class Server {
         this.port = process.env.PORT;
         // // this.{modelo}Path = '/api/{modelo}
         this.usuariosPath = '/api/usuarios'
+        this.productosPath = '/api/productos'
+
 
         // Conectar con la base de datos
         this.connectDB();
 
         // Middlewaares
         this.middlewares();
-        
+
         // Funciones de rutas
-        // this.routes();
+        this.routes();
     }
 
-    async connectDB(){
+    async connectDB() {
         await dbConnection();
     }
 
-    middlewares(){
+    middlewares() {
         // CORS
         this.app.use(cors());
 
@@ -34,12 +36,15 @@ class Server {
         this.app.use(express.static('public'));
     }
 
+
     routes(){
         // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
-         this.app.use(this.usuariosPath, require('../routes/usuarios'));
+        this.app.use(this.usuariosPath, require('../routes/usuarios'));
+        this.app.use(this.productosPath, require('../routes/productos'))
+
     }
 
-    listen(){
+    listen() {
         this.app.listen(this.port, () => {
             console.log('Server online port: ', this.port);
         })
