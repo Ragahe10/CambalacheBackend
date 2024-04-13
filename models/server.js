@@ -7,7 +7,9 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         // // this.{modelo}Path = '/api/{modelo}
+        this.usuariosPath = '/api/usuarios'
         this.productosPath = '/api/productos'
+
 
         // Conectar con la base de datos
         this.connectDB();
@@ -34,9 +36,12 @@ class Server {
         this.app.use(express.static('public'));
     }
 
-    routes() {
-        // this.app.use(this.{ modelo }Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
+
+    routes(){
+        // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
+        this.app.use(this.usuariosPath, require('../routes/usuarios'));
         this.app.use(this.productosPath, require('../routes/productos'))
+
     }
 
     listen() {
