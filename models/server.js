@@ -9,7 +9,8 @@ class Server {
         // // this.{modelo}Path = '/api/{modelo}
         this.usuariosPath = '/api/usuarios'
         this.productosPath = '/api/productos'
-
+        this.paquetePath = '/api/paquete'
+        this.ventaPath = '/api/venta'
 
         // Conectar con la base de datos
         this.connectDB();
@@ -36,11 +37,12 @@ class Server {
         this.app.use(express.static('public'));
     }
 
-
     routes(){
         // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
         this.app.use(this.usuariosPath, require('../routes/usuarios'));
-        this.app.use(this.productosPath, require('../routes/productos'))
+        this.app.use(this.productosPath, require('../routes/productos'));
+        this.app.use(this.paquetePath, require('../routes/paquete'));
+        this.app.use(this.ventaPath, require('../routes/venta'));
 
     }
 
