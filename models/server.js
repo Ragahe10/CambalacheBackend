@@ -7,6 +7,8 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         // // this.{modelo}Path = '/api/{modelo}
+        this.usuariosPath = '/api/usuarios'
+        this.productosPath = '/api/productos'
         this.paquetePath = '/api/paquete'
         this.ventaPath = '/api/venta'
 
@@ -15,16 +17,16 @@ class Server {
 
         // Middlewaares
         this.middlewares();
-        
+
         // Funciones de rutas
         this.routes();
     }
 
-    async connectDB(){
+    async connectDB() {
         await dbConnection();
     }
 
-    middlewares(){
+    middlewares() {
         // CORS
         this.app.use(cors());
 
@@ -37,11 +39,14 @@ class Server {
 
     routes(){
         // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
+        this.app.use(this.usuariosPath, require('../routes/usuarios'));
+        this.app.use(this.productosPath, require('../routes/productos'));
         this.app.use(this.paquetePath, require('../routes/paquete'));
         this.app.use(this.ventaPath, require('../routes/venta'));
+
     }
 
-    listen(){
+    listen() {
         this.app.listen(this.port, () => {
             console.log('Server online port: ', this.port);
         })
