@@ -1,9 +1,11 @@
 const {Router} = require('express');
-const { usuariosGet, usuarioGet, usuarioPost, usuarioPut, usuarioDelete } = require('../controllers/usuario');
+const { usuariosGet, usuariosActivosGet, usuarioGet, usuarioPost, usuarioPut, usuarioDelete } = require('../controllers/usuario');
 
 const router = Router();
 
 router.get('/', usuariosGet);
+
+router.get('/activos', usuariosActivosGet);
 
 router.get('/:id', usuarioGet);
 

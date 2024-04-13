@@ -30,7 +30,7 @@ const ventasPost = async (req = request, res = response) => {
     const datos = req.body;
 
     // Comprobante y finalizada si va??
-    const { usuario, productos, paquetes, comprobante, finalizada } = datos;
+    const { usuario, productos, paquetes } = datos;
 
     const venta = new Venta({ datos });
 
@@ -46,8 +46,8 @@ const ventasPost = async (req = request, res = response) => {
 const ventaPut = async (req = request, res = response) => {
     try {
         const ventaId = req.params.id;
-        const newDatos = req.body;
-        await Venta.findByIdAndUpdate(ventaId, newDatos);
+        const {comprobante, finalizada} = req.body;
+        await Venta.findByIdAndUpdate(ventaId, {comprobante, finalizada});
         res.json({
             mensaje: 'La venta se modificó correctamente'
         });
@@ -58,18 +58,6 @@ const ventaPut = async (req = request, res = response) => {
         });
     }
 }
-
-// const ventaDelete = async (req = request, res = response) => {
-
-//     const { id } = req.params;
-//     const ventaEliminada = await Venta.findByIdAndDelete(id);
-
-//     res.json({
-//         mensaje: 'Venta eliminada corerctamente',
-//         ventaEliminada
-//     });
-
-// }
 
 
 const ventaDelete = async (req = request, res = response) => {
