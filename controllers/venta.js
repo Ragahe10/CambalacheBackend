@@ -1,8 +1,8 @@
 const { response, request } = require('express');
-const Venta = require('. /models/usuario');
+const Venta = require('../models/venta');
 
 
-const ventaGet = async (req = request, res = response) => {
+const ventasGet = async (req = request, res = response) => {
 
     // Hacemos la consulta
     const datos = req.query;
@@ -24,7 +24,7 @@ const ventaGet = async (req = request, res = response) => {
     })
 }
 
-const ventaPost = async (req = request, res = response) => {
+const ventasPost = async (req = request, res = response) => {
 
     // Recibir el cuerpo de la peticion
     const datos = req.body;
@@ -101,8 +101,8 @@ const ventaDelete = async (req = request, res = response) => {
 
 
 module.exports = {
-    ventaGet,
-    ventaPost,
+    ventasGet,
+    ventasPost,
     ventaPut,
     ventaDelete
 }

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { productosPost, productosGet, productoGet, productosPut, productosDelete } = require('../controllers/productos');
+const { productosPost, productosGet, productoGet, productosPut, productosDelete } = require('../controllers/producto');
 
 
 const router = Router();
