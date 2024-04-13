@@ -60,7 +60,8 @@ const paquetePost = async (req=request, res=response) => {
 }
 
 const paquetePut = async (req=request, res=response) => {
-    const id = req.params.id;
+    const id = req.params.id; 
+    
 
     const paquete = await Paquete.findByIdAndUpdate(id, req.body, {new: true});
     

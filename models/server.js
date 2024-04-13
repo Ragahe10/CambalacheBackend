@@ -8,6 +8,7 @@ class Server {
         this.port = process.env.PORT;
         // // this.{modelo}Path = '/api/{modelo}
         this.paquetePath = '/api/paquete'
+        this.ventaPath = '/api/venta'
 
         // Conectar con la base de datos
         this.connectDB();
@@ -36,7 +37,8 @@ class Server {
 
     routes(){
         // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
-        this.app.use(this.paquetePath, require('../routes/paquete'))
+        this.app.use(this.paquetePath, require('../routes/paquete'));
+        this.app.use(this.ventaPath, require('../routes/venta'));
     }
 
     listen(){
