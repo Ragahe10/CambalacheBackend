@@ -1,10 +1,14 @@
 const { Router } = require('express');
-const {ventasGet, ventasPost, ventaPut, ventaDelete} = require('../controllers/venta');
+const {ventasGet, ventasUsuarioGet,/* ventasFiltroGet, */ventasPost, ventaPut, ventaDelete} = require('../controllers/venta');
 const router = Router();
 
 //Rutas para CRUD
 
 router.get('/', ventasGet);
+
+router.get('/usuario/:idUsuario', ventasUsuarioGet);
+
+// router.get('/filtro/', ventasFiltroGet);
 
 router.post('/', ventasPost);
 
