@@ -20,7 +20,8 @@ const productosPost = async (req = request, res = response) => {
 const productosGet = async (req = request, res = response) => {
     try {
         /*Para la paginacion hay que tener en cuenta que los parametros de query se deben
-        incluir en el url con un signo de pregunta al final y separados por &, Ej: localhost:3000/api/producto?desde={valor}&hasta={valor}*/
+        incluir en el url con un signo de pregunta al final y separados por &, 
+        Ej: localhost:3000/api/producto?desde={valor}&hasta={valor}*/
         const { desde = 0, limite = 10 } = req.query;
         const [total, productos] = await Promise.all([
             Producto.countDocuments(),
@@ -107,4 +108,10 @@ const productosDelete = async (req = request, res = response) => {
     }
 };
 
-module.exports = { productosPost, productosGet, productoGet, productosPut, productosDelete };
+module.exports = { 
+    productosPost, 
+    productosGet, 
+    productosActivosGet, 
+    productoGet, 
+    productosPut, 
+    productosDelete };
