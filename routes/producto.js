@@ -12,4 +12,3 @@ router.put('/:id', productosPut)
 router.delete('/:id', productosDelete)
 
 module.exports = router;
-
