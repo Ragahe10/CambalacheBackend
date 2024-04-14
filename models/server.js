@@ -11,6 +11,7 @@ class Server {
         this.productosPath = '/api/producto'
         this.paquetePath = '/api/paquete'
         this.ventaPath = '/api/venta'
+        this.carritoPath = '/api/carrito'
 
         // Conectar con la base de datos
         this.connectDB();
@@ -43,6 +44,7 @@ class Server {
         this.app.use(this.productosPath, require('../routes/producto'));
         this.app.use(this.paquetePath, require('../routes/paquete'));
         this.app.use(this.ventaPath, require('../routes/venta'));
+        this.app.use(this.carritoPath, require('../routes/carrito'));
 
     }
 

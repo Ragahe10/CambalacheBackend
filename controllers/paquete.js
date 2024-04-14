@@ -30,7 +30,7 @@ const paquetesGet = async (req = request, res = response) => {
         res.json({
             mensaje: "Paquetes obtenidos",
             total,
-            paquetes //comentar posteriormente
+            paquetes 
         });
     } catch (error) { // 500 error de servidor
         console.error("Error al obtener todos los paquetes:", error);
