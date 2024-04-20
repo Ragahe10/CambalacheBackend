@@ -7,6 +7,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         // // this.{modelo}Path = '/api/{modelo}
+        this.authPath = '/api/auth';
         this.usuariosPath = '/api/usuario'
         this.productosPath = '/api/producto'
         this.paquetePath = '/api/paquete'
@@ -15,7 +16,6 @@ class Server {
         this.categoriaPath = '/api/categoria'
         this.carritoPath = '/api/carrito'
         this.favoritoPath = '/api/favorito'
-
 
         // Conectar con la base de datos
         this.connectDB();
@@ -40,10 +40,11 @@ class Server {
 
         // Definir la carpeta pública
         this.app.use(express.static('public'));
-    }
+    };
 
     routes(){
         // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
+        this.app.use(this.authPath, require('../routes/auth'));
         this.app.use(this.usuariosPath, require('../routes/usuario'));
         this.app.use(this.productosPath, require('../routes/producto'));
         this.app.use(this.paquetePath, require('../routes/paquete'));

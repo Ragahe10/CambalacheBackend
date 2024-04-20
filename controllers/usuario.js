@@ -1,6 +1,6 @@
 const { response , request } = require('express');
 const Usuario = require('../models/usuario');
-// let bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const usuarioPost = async (req = request, res = response) => {
     try {
@@ -10,7 +10,9 @@ const usuarioPost = async (req = request, res = response) => {
         const usuario = new Usuario({ nombre, correo, password, rol });
 
         // Encriptar la contraseña
-        // const salt = bcrypt.genSaltSync(10)
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(password, salt);
+            usuario.password = hash;
 
         // Guardar en la BD
         await usuario.save();
@@ -79,14 +81,21 @@ const usuarioGet = async (req = request, res = response) => {
     }
 };
 
-const usuarioPut = async (req = request, res = response) => {
+const usuarioPut = async (req =request, res =response) => {
     try {
-        const { id } = req.params;
+        const {id} = req.params;
 
         // Obtener datos para actualizar
         const { password, correo, estado } = req.body;
 
         // Si actualiza la contraseña, hay que cifrarla o encriptarla
+        if(password){
+            const salt = bcrypt.genSaltSync(10);
+            resto.password = bcrypt.hashSync(password, salt);
+        }
+            //VER BIEN SI VA RESTO O NO
+            
+        resto.correo = correo;
 
         // Buscar el usuario y actualizarlo
         const usuario = await Usuario.findByIdAndUpdate(id, { password, correo, estado }, { new: true });
@@ -136,5 +145,5 @@ module.exports = {
     usuariosActivosGet,
     usuarioGet,
     usuarioPut,
-    usuarioDelete,
-}
+    usuarioDelete
+};
