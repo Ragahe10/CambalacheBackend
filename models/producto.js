@@ -4,7 +4,9 @@ const ProductoSchema = Schema({
     descripcion: {type: String, required: [true, 'La descripcion es obligatoria']},
     tipo: {type: String, required: [true, 'El tipo es obligatorio']},
     precio: {type: Number, required: [true, 'El precio es obligatorio']},
-    //imagenes:{}
+    imagenes:[
+        {type: String}
+    ],
     activo: {type: Boolean, default: true}
 })
 
