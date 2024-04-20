@@ -1,4 +1,5 @@
 const { Schema, model} = require('mongoose');
+const categoria = require('./categoria');
 
 const PaqueteSchema = Schema({
     nombre : { type: String , require: [true, 'El nombre del paquete es obligatorio'], unique: true},
@@ -8,6 +9,7 @@ const PaqueteSchema = Schema({
         producto: {type: Schema.Types.ObjectId, ref: 'Producto', require: true},
         cantidad: {type: Number, default: 1}
     }],
+    categoria: {type: String, required: [true, 'El tipo es obligatorio']},
     estado: {type: Boolean, default: true}
 });
 

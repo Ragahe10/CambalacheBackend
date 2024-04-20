@@ -8,12 +8,14 @@ class Server {
         this.port = process.env.PORT;
         // // this.{modelo}Path = '/api/{modelo}
         this.authPath = '/api/auth';
-        this.usuarioPath = '/api/usuario';
-        // this.productosPath = '/api/producto'
-        // this.paquetePath = '/api/paquete'
-        // this.ventaPath = '/api/venta'
-        // this.carritoPath = '/api/carrito'
-        // this.favoritoPath = '/api/favorito'
+        this.usuariosPath = '/api/usuario'
+        this.productosPath = '/api/producto'
+        this.paquetePath = '/api/paquete'
+        this.ventaPath = '/api/venta'
+        this.tipoPath = '/api/tipo'
+        this.categoriaPath = '/api/categoria'
+        this.carritoPath = '/api/carrito'
+        this.favoritoPath = '/api/favorito'
 
         // Conectar con la base de datos
         this.connectDB();
@@ -43,12 +45,14 @@ class Server {
     routes(){
         // this.app.use(this.{modelo}Path, require('../routes/{modelo})) vincula con el archivo en la carpeta routes
         this.app.use(this.authPath, require('../routes/auth'));
-        this.app.use(this.usuarioPath, require('../routes/usuario'));
-        // this.app.use(this.productosPath, require('../routes/producto'));
-        // this.app.use(this.paquetePath, require('../routes/paquete'));
-        // this.app.use(this.ventaPath, require('../routes/venta'));
-        // this.app.use(this.carritoPath, require('../routes/carrito'));
-        // this.app.use(this.favoritoPath, require('../routes/favorito'));
+        this.app.use(this.usuariosPath, require('../routes/usuario'));
+        this.app.use(this.productosPath, require('../routes/producto'));
+        this.app.use(this.paquetePath, require('../routes/paquete'));
+        this.app.use(this.ventaPath, require('../routes/venta'));
+        this.app.use(this.tipoPath, require('../routes/tipo'));
+        this.app.use(this.categoriaPath, require('../routes/categoria'));
+        this.app.use(this.carritoPath, require('../routes/carrito'));
+        this.app.use(this.favoritoPath, require('../routes/favorito'));
 
     }
 
