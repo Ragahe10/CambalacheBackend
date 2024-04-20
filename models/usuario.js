@@ -6,7 +6,7 @@ const UsuarioSchema = Schema({
     correo: {type: String, required:[true, 'El correo es obligatorio'], unique: true},
     password: {type: String, required:[true, 'El contraseña es obligatoria']},
     carrito:{type: Schema.Types.ObjectId, ref: 'Carrito'},
-    // favorito:{type: Schema.Types.ObjectId, ref: 'Favorito'},
+    favorito:{type: Schema.Types.ObjectId, ref: 'Favorito'},
     rol: {type: String, required: true},
     estado: {type: Boolean, default: true},
 });
