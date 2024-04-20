@@ -1,3 +1,5 @@
+const Carrito = require('./carrito');
+const Favorito = require('./favorito');
 const { Schema, model } = require('mongoose');
 // const { removeAllListeners } = require('nodemon');
 
@@ -9,6 +11,31 @@ const UsuarioSchema = Schema({
     favorito:{type: Schema.Types.ObjectId, ref: 'Favorito'},
     rol: {type: String, required: true, default: 'USER_ROLE'},
     estado: {type: Boolean, default: true},
+});
+
+
+// Hook pre-save para crear y asignar carrito y favoritos
+UsuarioSchema.pre('save', async function (next) {
+    try {
+        // Crear un nuevo carrito
+        const nuevoCarrito = new Carrito();
+        // Guardar el carrito en la base de datos
+        await nuevoCarrito.save();
+        // Asignar el ID del carrito al usuario
+        this.carrito = nuevoCarrito._id;
+
+        // Crear nuevos favoritos
+        const nuevosFavoritos = new Favorito();
+        // Guardar los favoritos en la base de datos
+        await nuevosFavoritos.save();
+        // Asignar el ID de los favoritos al usuario
+        this.favorito = nuevosFavoritos._id;
+
+        // Continuar con el proceso de guardado
+        next();
+    } catch (error) {
+        next(error); // Pasar el error al siguiente middleware
+    }
 });
 
 //quitar datos extras en la respuesta JSON

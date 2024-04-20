@@ -70,6 +70,12 @@ const usuarioGet = async (req = request, res = response) => {
 
         // Buscar el usuario
         const usuario = await Usuario.findById(id);
+        
+        if(!usuario){
+            res.status(401).json({
+                mensaje: 'El usuario no existe',
+            });
+        }
 
         res.json({
             mensaje: 'Usuario obtenido correctamente',

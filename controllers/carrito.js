@@ -23,23 +23,23 @@ const carritoGet = async (req, res) =>{
     }
 }
 
-const carritoPost = async (req, res) =>{
-    try {
-        const {productos, paquetes} = req.body
-        const carrito = new Carrito({productos, paquetes});
+// const carritoPost = async (req, res) =>{
+//     try {
+//         const {productos, paquetes} = req.body
+//         const carrito = new Carrito({productos, paquetes});
 
-        await carrito.save();
+//         await carrito.save();
 
-        res.json({
-            mensaje:"Carrito creado",
-            carrito
-        });
+//         res.json({
+//             mensaje:"Carrito creado",
+//             carrito
+//         });
 
-    } catch (error) {
-        console.error("Error al cargar el carrito:", error);
-        res.status(500).json({ mensaje: "Error al cargar el carrito" });
-    }
-}
+//     } catch (error) {
+//         console.error("Error al cargar el carrito:", error);
+//         res.status(500).json({ mensaje: "Error al cargar el carrito" });
+//     }
+// }
 
 const carritoPut = async (req, res) =>{
     try {
@@ -88,7 +88,7 @@ const carritoDelete = async (req, res) =>{
 
 module.exports = {
     carritoGet,
-    carritoPost,
+    // carritoPost,
     carritoPut,
     carritoDelete,
 }

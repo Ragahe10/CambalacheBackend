@@ -23,23 +23,23 @@ const favoritoGet = async (req, res) =>{
     }
 }
 
-const favoritoPost = async (req, res) =>{
-    try {
-        const {productos, paquetes} = req.body
-        const favorito = new Favorito({productos, paquetes});
+// const favoritoPost = async (req, res) =>{
+//     try {
+//         const {productos, paquetes} = req.body
+//         const favorito = new Favorito({productos, paquetes});
 
-        await favorito.save();
+//         await favorito.save();
 
-        res.json({
-            mensaje:"Favorito creado",
-            favorito
-        });
+//         res.json({
+//             mensaje:"Favorito creado",
+//             favorito
+//         });
 
-    } catch (error) {
-        console.error("Error al cargar el favorito:", error);
-        res.status(500).json({ mensaje: "Error al cargar el favorito" });
-    }
-}
+//     } catch (error) {
+//         console.error("Error al cargar el favorito:", error);
+//         res.status(500).json({ mensaje: "Error al cargar el favorito" });
+//     }
+// }
 
 const favoritoPut = async (req, res) =>{
     try {
@@ -88,7 +88,7 @@ const favoritoDelete = async (req, res) =>{
 
 module.exports = {
     favoritoGet,
-    favoritoPost,
+    // favoritoPost,
     favoritoPut,
     favoritoDelete,
 }

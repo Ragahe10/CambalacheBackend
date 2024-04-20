@@ -1,6 +1,7 @@
 const Usuario = require('../models/usuario');
 const Rol = require('../models/rol');
 const Producto = require('../models/producto');
+const Paquete = require('../models/paquete');
 
 
 //validar el email de usuario
@@ -36,6 +37,15 @@ const nombreProductoExiste = async (nombre) => {
     const existeProducto = await Producto.findOne({ nombre });
 
     if (existeProducto) {
+        throw new Error(`El nombre "${nombre}" ya está en uso.`);
+    }
+}
+// Validar si el nombre del producto existe
+const nombrePaqueteExiste = async (nombre) => {
+    nombre = nombre.toUpperCase();
+    const existePaquete = await Paquete.findOne({ nombre });
+
+    if (existePaquete) {
         throw new Error(`El nombre "${nombre}" ya está en uso.`);
     }
 }
@@ -95,6 +105,7 @@ module.exports = {
     usuarioExiste,
     productoExiste,
     nombreProductoExiste,
+    nombrePaqueteExiste,
     categoriaExiste,
     tipoExiste,
     esCategoriaValido,
