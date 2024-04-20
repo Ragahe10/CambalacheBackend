@@ -36,23 +36,15 @@ const categoriaGet = async (req = request, res = response) => {
 
 const categoriasPost = async (req = request, res = response) => {
     try {
-        const nombre = req.body.nombre.toUpperCase();
+        const categoria = req.body.categoria.toUpperCase();
         
-        // const categoriaDB = await Categoria.findOne({nombre});
-    
-        // if (categoriaDB){
-        //     res.status(400).json({
-        //         msg: 'La categoría ya existe'
-        //     });
-        // };
-    
         const data = {
-            nombre
+            categoria
         };
     
-        const categoria = new Categoria(data);
+        const categoriaM = new Categoria(data);
     
-        await categoria.save();
+        await categoriaM.save();
     
         res.json({
             msg: 'Categoría creada correctamente'
@@ -66,15 +58,15 @@ const categoriasPost = async (req = request, res = response) => {
 const categoriasPut = async (req = request, res = response) => {
     try {
         const { id } = req.params;
-        const nombre = req.body.nombre.toUpperCase();
+        const categoria = req.body.categoria.toUpperCase();
     
         const data = {
-            nombre
+            categoria
         };
-        const categoria = await Categoria.findByIdAndUpdate(id, data, { new: true });
+        const categoriaM = await Categoria.findByIdAndUpdate(id, data, { new: true });
         res.json({
             msg: 'Categoría modificada correctamente',
-            categoria
+            categoriaM
         });
     } catch (error) {
         console.error('Error al modificar la categoría:', error);

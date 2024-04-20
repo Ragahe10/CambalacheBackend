@@ -4,8 +4,8 @@ const Producto = require('../models/producto');
 const productosPost = async (req = request, res = response) => {
     try {
         const datos = req.body;
-        const { nombre, descripcion, tipo, precio } = datos;
-        const producto = new Producto({ nombre, descripcion, tipo, precio });
+        const { nombre, descripcion, tipo, precio, imagenes } = datos;
+        const producto = new Producto({ nombre, descripcion, tipo, precio, imagenes });
         await producto.save();
         res.json({
             msg: 'Producto creado correctamente',
@@ -74,11 +74,7 @@ const productoGet = async (req = request, res = response) => {
 const productosPut = async (req = request, res = response) => {
     try {
         const { id } = req.params;
-        const { nombre, descripcion, tipo, precio, ...resto } = req.body;
-        resto.nombre = nombre;
-        resto.descripcion = descripcion;
-        resto.tipo = tipo;
-        resto.precio = precio;
+        const { ...resto } = req.body;
         const producto = await Producto.findByIdAndUpdate(id, resto, { new: true });
         res.json({
             msg: 'Producto modificado correctamente',

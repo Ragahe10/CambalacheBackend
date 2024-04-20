@@ -4,15 +4,26 @@ const { usuariosGet, usuariosActivosGet, usuarioGet, usuarioPost, usuarioPut, us
 const { esRolValido, emailExiste, usuarioExiste } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar_campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
-const { esAdminRole } = require('../middlewares/validar-roles');
+const { usuarioPermitidoUD, adminRole } = require('../middlewares/validar-usuario');
 
 const router = Router();
 
-router.get('/', usuariosGet);
+router.get('/',
+    [
+        validarJWT,
+        adminRole,
+        validarCampos
+    ],
+    usuariosGet);
 
 router.get('/activos', usuariosActivosGet);
 
-router.get('/:id', usuarioGet);
+router.get('/:id',
+    [
+        check('id' , 'No es un ID Válido').isMongoId(),
+        check('id').custom(usuarioExiste),
+    ],
+    usuarioGet);
 
 router.post('/',
     [
@@ -29,7 +40,7 @@ router.put('/:id',
         validarJWT,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('id').custom(usuarioExiste),
-        check('rol').custom(esRolValido),
+        usuarioPermitidoUD,
         validarCampos
     ] ,
     usuarioPut);
@@ -37,9 +48,9 @@ router.put('/:id',
 router.delete('/:id',
     [
         validarJWT,
-        esAdminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('id').custom(usuarioExiste),
+        usuarioPermitidoUD,
         validarCampos
     ] ,
     usuarioDelete);

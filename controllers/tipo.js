@@ -36,23 +36,14 @@ const tipoGet = async (req = request, res = response) => {
 
 const tiposPost = async (req = request, res = response) => {
     try {
-        const nombre = req.body.nombre.toUpperCase();
-        
-        // const tipoDB = await Tipo.findOne({nombre});
-    
-        // if (tipoDB){
-        //     res.status(400).json({
-        //         msg: 'El tipo ya existe'
-        //     });
-        // };
-    
+        const tipo = req.body.tipo.toUpperCase();
         const data = {
-            nombre
+            tipo
         };
     
-        const tipo = new Tipo(data);
+        const tipoM = new Tipo(data);
     
-        await tipo.save();
+        await tipoM.save();
     
         res.json({
             msg: 'Tipo creado correctamente'
@@ -66,15 +57,15 @@ const tiposPost = async (req = request, res = response) => {
 const tiposPut = async (req = request, res = response) => {
     try {
         const { id } = req.params;
-        const nombre = req.body.nombre.toUpperCase();
+        const tipo = req.body.tipo.toUpperCase();
     
         const data = {
-            nombre
+            tipo
         };
-        const tipo = await Tipo.findByIdAndUpdate(id, data, { new: true });
+        const tipoM = await Tipo.findByIdAndUpdate(id, data, { new: true });
         res.json({
             msg: 'Tipo modificado correctamente',
-            tipo
+            tipoM
         });
     } catch (error) {
         console.error('Error al modificar el tipo:', error);

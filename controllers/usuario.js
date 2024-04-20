@@ -6,8 +6,8 @@ const usuarioPost = async (req = request, res = response) => {
     try {
         // Recibir el cuerpo de la petición
         const datos = req.body;
-        const { nombre, correo, password, rol } = datos;
-        const usuario = new Usuario({ nombre, correo, password, rol });
+        const { nombre, correo, password } = datos;
+        const usuario = new Usuario({ nombre, correo, password });
 
         // Encriptar la contraseña
             const salt = bcrypt.genSaltSync(10);
@@ -86,19 +86,16 @@ const usuarioPut = async (req =request, res =response) => {
         const {id} = req.params;
 
         // Obtener datos para actualizar
-        const { password, correo, estado } = req.body;
+        const { password, ...resto } = req.body;
 
         // Si actualiza la contraseña, hay que cifrarla o encriptarla
         if(password){
             const salt = bcrypt.genSaltSync(10);
             resto.password = bcrypt.hashSync(password, salt);
         }
-            //VER BIEN SI VA RESTO O NO
-            
-        resto.correo = correo;
 
         // Buscar el usuario y actualizarlo
-        const usuario = await Usuario.findByIdAndUpdate(id, { password, correo, estado }, { new: true });
+        const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
 
         res.json({
             mensaje: 'Usuario actualizado correctamente',

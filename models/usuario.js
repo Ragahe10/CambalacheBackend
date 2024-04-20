@@ -7,7 +7,7 @@ const UsuarioSchema = Schema({
     password: {type: String, required:[true, 'El contraseña es obligatoria']},
     carrito:{type: Schema.Types.ObjectId, ref: 'Carrito'},
     favorito:{type: Schema.Types.ObjectId, ref: 'Favorito'},
-    rol: {type: String, required: true},
+    rol: {type: String, required: true, default: 'USER_ROLE'},
     estado: {type: Boolean, default: true},
 });
 
