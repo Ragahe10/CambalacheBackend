@@ -60,14 +60,10 @@ const paqueteGet = async (req = request, res = response) => {
 const paquetePost = async (req = request, res = response) => {
     try {
         const nombreDB = req.body.nombre.toUpperCase();
-        const paqueteDB = await Paquete.findOne({ nombre: nombreDB });
 
-        if (paqueteDB) {
-            return res.status(400).json({ mensaje: "El nombre de paquete ya existe" });
-        }
-
-        const { nombre, descripcion, precio, productos } = req.body;
-        const paquete = new Paquete({ nombre, descripcion, precio, productos });
+        const {descripcion, precio, productos, categoria } = req.body;
+        const nombre = req.body.nombre.toUpperCase();
+        const paquete = new Paquete({ nombre, descripcion, precio, productos, categoria });
 
         await paquete.save();
 
@@ -84,7 +80,9 @@ const paquetePost = async (req = request, res = response) => {
 const paquetePut = async (req = request, res = response) => {
     try {
         const id = req.params.id;
-        const paquete = await Paquete.findByIdAndUpdate(id, req.body, { new: true });
+        const {descripcion, precio, productos, categoria } = req.body;
+        const nombre = req.body.nombre.toUpperCase();
+        const paquete = await Paquete.findByIdAndUpdate(id, {descripcion, precio, productos, categoria, nombre}, { new: true });
 
         if (!paquete) {
             return res.status(404).json({ mensaje: "No se encontró el paquete para actualizar" });

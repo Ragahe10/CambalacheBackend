@@ -5,7 +5,8 @@ const { validarCampos } = require('../middlewares/validar_campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { adminRole } = require('../middlewares/validar-usuario');
 const { productosValidos } = require('../middlewares/validar-productos');
-const { nombrePaqueteExiste, esCategoriaValido } = require('../helpers/db-validators');
+const { esCategoriaValido } = require('../middlewares/validar-categorias');
+const { nombrePaqueteExiste } = require('../middlewares/validar-paquetes');
 const router = express.Router();
 
 //Rutas para CRUD
@@ -37,11 +38,11 @@ router.post('/',
     [
         validarJWT,
         productosValidos,
-        check('nombre').custom(nombrePaqueteExiste),
+        nombrePaqueteExiste,
         check('descripcion', 'La descripción es obligatoria').notEmpty(),
         check('precio', 'El precio es obligatorio').notEmpty(),
         check('precio', 'El precio debe ser un valor numérico').isFloat({ min: 0 }),
-        check('categoria').custom(esCategoriaValido),
+        esCategoriaValido,
         validarCampos
     ],
     paquetePost);
@@ -51,8 +52,8 @@ router.put('/:id',
         validarJWT,
         productosValidos,
         check('id', 'No es un ID Válido').isMongoId(),
-        check('nombre').custom(nombrePaqueteExiste),
-        check('categoria').custom(esCategoriaValido),
+        nombrePaqueteExiste,
+        esCategoriaValido,
         validarCampos
     ],
     paquetePut);

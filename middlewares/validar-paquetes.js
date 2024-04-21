@@ -24,6 +24,29 @@ const paquetesValidos = async (req, res, next) => {
     }
 }
 
+// Validar si el nombre del producto existe
+const nombrePaqueteExiste = async (req, res, next) => {
+    const nombre = req.body.nombre.toUpperCase();
+    const existePaquete = await Paquete.findOne({ nombre });
+
+    const id = req.params;
+    if(!id){
+        if (existePaquete) {
+            return res.status(401).json({
+                msj:`El nombre "${nombre}" ya está en uso.`});
+        }
+    } else{
+        if (existePaquete && existePaquete!=id) {
+            return res.status(401).json({
+                msj:`El nombre "${nombre}" ya está en uso.`});
+        }
+    }
+
+    next();
+}
+
+
 module.exports = {
-    paquetesValidos
+    paquetesValidos,
+    nombrePaqueteExiste
 }

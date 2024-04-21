@@ -9,7 +9,7 @@ const PaqueteSchema = Schema({
         producto: {type: Schema.Types.ObjectId, ref: 'Producto', require: true},
         cantidad: {type: Number, default: 1}
     }],
-    categoria: {type: String, required: [true, 'El tipo es obligatorio']},
+    categoria: {type: String, required: [true, 'La categoria es obligatorio']},
     estado: {type: Boolean, default: true}
 });
 

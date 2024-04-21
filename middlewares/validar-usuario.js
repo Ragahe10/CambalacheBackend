@@ -108,9 +108,21 @@ const EsSuCarrito = async (req, res, next) => {
     }
 }
 
+//validar el email de usuario
+const emailExiste = async (correo) => {
+    const existeEmail = await Usuario.findOne({correo}) ;
+
+    if(existeEmail){
+        return res.status(401).json({
+            msj:`El correo ${correo} ya se encuentra en la base de datos registrado`});
+    }
+    next();
+}
+
 module.exports = {
     usuarioPermitidoUD,
     adminRole,
     EsSuCarrito,
-    EsSuFavorito
+    EsSuFavorito,
+    emailExiste
 }

@@ -4,7 +4,7 @@ const { validarCampos } = require('../middlewares/validar_campos');
 const { check } = require('express-validator');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { adminRole } = require('../middlewares/validar-usuario');
-const { tipoExiste } = require('../helpers/db-validators');
+const { tipoExiste } = require('../middlewares/validar-tipos');
 
 
 const router = Router();
@@ -23,7 +23,7 @@ router.post('/',
         validarJWT,
         adminRole,
         check('tipo',' el nombre es obligatorio').notEmpty(),
-        check('tipo').custom(tipoExiste),
+        tipoExiste,
         validarCampos
     ],
     tiposPost)
@@ -34,7 +34,7 @@ router.put('/:id',
         adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('tipo',' el nombre es obligatorio').notEmpty(),
-        check('tipo').custom(tipoExiste),
+        tipoExiste,
         validarCampos
     ],
     tiposPut)

@@ -3,8 +3,9 @@ const Producto = require('../models/producto');
 
 const productosPost = async (req = request, res = response) => {
     try {
-        const datos = req.body;
-        const { nombre, descripcion, tipo, precio, imagenes } = datos;
+        const { descripcion, tipo, precio, imagenes } = req.body;
+        const nombre = req.body.nombre.toUpperCase();
+        console.log(nombre);
         const producto = new Producto({ nombre, descripcion, tipo, precio, imagenes });
         await producto.save();
         res.json({

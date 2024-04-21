@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { categoriasPost, categoriaGet, categoriasGet, categoriasPut, categoriasDelete } = require('../controllers/categoria');
 const { validarCampos } = require('../middlewares/validar_campos');
 const { check } = require('express-validator');
-const { categoriaExiste } = require('../helpers/db-validators');
+const { categoriaExiste } = require('../middlewares/validar-categorias');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { adminRole } = require('../middlewares/validar-usuario');
 
@@ -24,7 +24,7 @@ router.post('/',
         validarJWT,
         adminRole,
         check('categoria',' el nombre es obligatorio').notEmpty(),
-        check('categoria').custom(categoriaExiste),
+        categoriaExiste,
         validarCampos
     ],
     categoriasPost)
@@ -35,7 +35,7 @@ router.put('/:id',
         adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('categoria',' el nombre es obligatorio').notEmpty(),
-        check('categoria').custom(categoriaExiste),
+        categoriaExiste,
         validarCampos
     ],
     categoriasPut)
