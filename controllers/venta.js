@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const Venta = require('../models/venta');
 const Usuario = require('../models/usuario');
+const jwt = require("jsonwebtoken");
 
 const ventasGet = async (req = request, res = response) => {
     try {
@@ -44,8 +45,9 @@ const ventasPost = async (req = request, res = response) => {
     try {
         // Recibir el cuerpo de la petición
         const datos = req.body;
-        const { usuario, productos, paquetes } = datos;
-
+        const { productos, paquetes } = datos;
+        const token = req.header('x-token');
+        const { uid:usuario } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
         // Crear la venta
         const venta = new Venta({ usuario, productos, paquetes });
 

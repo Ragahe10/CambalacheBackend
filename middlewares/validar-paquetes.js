@@ -4,17 +4,19 @@ const Paquete = require("../models/paquete");
 const paquetesValidos = async (req, res, next) => {
     try {
         const { paquetes } = req.body;
-        for (const p of paquetes) {
-            try {
-                const paquete = await Paquete.findById(p);
-                if (!paquete) {
-                    return res.status(401).json({
-                        msj: `El ID ${p} de paquete no existe`
-                    });
+        if(paquetes){
+            for (const p of paquetes) {
+                try {
+                    const paquete = await Paquete.findById(p.paquete);
+                    if (!paquete) {
+                        return res.status(401).json({
+                            msj: `El ID ${p.paquete} de paquete no existe`
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error al buscar el paquete:", error);
+                    return res.status(500).json({ mensaje: "Error interno del servidor" });
                 }
-            } catch (error) {
-                console.error("Error al buscar el paquete:", error);
-                return res.status(500).json({ mensaje: "Error interno del servidor" });
             }
         }
         next();

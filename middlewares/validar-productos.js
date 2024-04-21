@@ -3,17 +3,19 @@ const Producto = require("../models/producto");
 const productosValidos = async (req, res, next) => {
     try {
         const { productos } = req.body;
-        for (const p of productos) {
-            try {
-                const producto = await Producto.findById(p.producto);
-                if (!producto) {
-                    return res.status(401).json({
-                        msj: `El ID ${p} de producto no existe`
-                    });
+        if(productos){
+            for (const p of productos) {
+                try {
+                    const producto = await Producto.findById(p.producto);
+                    if (!producto) {
+                        return res.status(401).json({
+                            msj: `El ID ${p} de producto no existe`
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error al buscar el producto:", error);
+                    return res.status(500).json({ mensaje: "Error interno del servidor" });
                 }
-            } catch (error) {
-                console.error("Error al buscar el producto:", error);
-                return res.status(500).json({ mensaje: "Error interno del servidor" });
             }
         }
         next();
