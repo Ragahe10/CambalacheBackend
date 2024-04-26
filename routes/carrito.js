@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/:id',
     [
-        validarJWT,
+        // validarJWT,
         check('id', 'No es un ID Válido').isMongoId(),
         EsSuCarrito,
         validarCampos
@@ -21,7 +21,7 @@ router.get('/:id',
 
 router.put('/:id',
     [
-        validarJWT,
+        // validarJWT,
         check('id', 'No es un ID Válido').isMongoId(),
         EsSuCarrito,
         productosValidos,
@@ -32,7 +32,7 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        validarJWT,
+        // validarJWT,
         check('id', 'No es un ID Válido').isMongoId(),
         EsSuCarrito,
         validarCampos

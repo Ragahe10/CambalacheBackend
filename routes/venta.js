@@ -11,14 +11,14 @@ const router = Router();
 
 router.get('/',
     [
-        validarJWT,
+        // validarJWT,
         validarCampos
     ],
     ventasGet);
 
 router.get('/usuario/:idUsuario',
     [
-        validarJWT,
+        // validarJWT,
         check('idUsuario', 'No es un ID Válido').isMongoId(),
         validarCampos
     ],
@@ -28,7 +28,7 @@ router.get('/usuario/:idUsuario',
 
 router.post('/',
     [
-        validarJWT,
+        // validarJWT,
         paquetesValidos,
         productosValidos,
         validarCampos
@@ -37,7 +37,7 @@ router.post('/',
 
 router.put('/:id',
     [
-        validarJWT,
+        // validarJWT,
         check('id', 'No es un ID Válido').isMongoId(),
         paquetesValidos,
         productosValidos,
@@ -47,7 +47,7 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        validarJWT,
+        // validarJWT,
         check('id', 'No es un ID Válido').isMongoId(),
         validarCampos,
     ],

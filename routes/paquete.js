@@ -13,22 +13,22 @@ const router = express.Router();
 
 router.get('/activos',
     [
-        validarJWT,
+        // validarJWT,
         validarCampos
     ],
     paquetesActivosGet);
 
 router.get('/',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         validarCampos
     ],
     paquetesGet);
 
 router.get('/:id',
     [
-        validarJWT,
+        // validarJWT,
         check('id', 'No es un ID Válido').isMongoId(),
         validarCampos   
     ],
@@ -36,7 +36,7 @@ router.get('/:id',
 
 router.post('/',
     [
-        validarJWT,
+        // validarJWT,
         productosValidos,
         nombrePaqueteExiste,
         check('descripcion', 'La descripción es obligatoria').notEmpty(),
@@ -49,7 +49,7 @@ router.post('/',
 
 router.put('/:id',
     [
-        validarJWT,
+        // validarJWT,
         productosValidos,
         check('id', 'No es un ID Válido').isMongoId(),
         nombrePaqueteExiste,
@@ -60,8 +60,8 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('id', 'No es un ID Válido').isMongoId(),
         validarCampos
     ],

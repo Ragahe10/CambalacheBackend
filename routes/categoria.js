@@ -21,8 +21,8 @@ router.get('/', categoriasGet)
 
 router.post('/',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('categoria',' el nombre es obligatorio').notEmpty(),
         categoriaExiste,
         validarCampos
@@ -31,8 +31,8 @@ router.post('/',
 
 router.put('/:id',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('categoria',' el nombre es obligatorio').notEmpty(),
         categoriaExiste,
@@ -42,8 +42,8 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        validarJWT,
-        adminRole,        
+        // validarJWT,
+        // adminRole,        
         check('id' , 'No es un ID Válido').isMongoId(),
         validarCampos
     ],

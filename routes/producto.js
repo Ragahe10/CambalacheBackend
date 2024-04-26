@@ -23,16 +23,17 @@ router.get('/:id',
 
 router.get('/',
     [
-        validarJWT,
-        adminRole
+        // validarJWT,
+        // adminRole,
+        validarCampos
     ],
     productosGet)
 
 
 router.post('/',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         nombreProductoExiste,
         check('descripcion','La descripción es obligatoria').notEmpty(),
         check('precio', 'El precio es obligatorio').notEmpty(),
@@ -44,8 +45,8 @@ router.post('/',
 
 router.put('/:id',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('id').custom(productoExiste),
         nombreProductoExiste,
@@ -59,8 +60,8 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('id').custom(productoExiste),
         validarCampos

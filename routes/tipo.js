@@ -20,8 +20,8 @@ router.get('/', tiposGet)
 
 router.post('/',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('tipo',' el nombre es obligatorio').notEmpty(),
         tipoExiste,
         validarCampos
@@ -30,8 +30,8 @@ router.post('/',
 
 router.put('/:id',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('tipo',' el nombre es obligatorio').notEmpty(),
         tipoExiste,
@@ -41,8 +41,8 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        validarJWT,
-        adminRole,
+        // validarJWT,
+        // adminRole,
         check('id' , 'No es un ID Válido').isMongoId(),
         validarCampos
     ],
