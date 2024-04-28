@@ -30,7 +30,6 @@ router.post('/',
         check ('nombre' , "El nombre es obligatorio").notEmpty(),
         check('password', 'La contraseña debe tener un minimo de 6 caracteres').isLength({min:6}),
         emailExiste,
-        check('rol').custom(esRolValido),
         validarCampos
     ],
     usuarioPost);

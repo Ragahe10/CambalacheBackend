@@ -109,7 +109,8 @@ const EsSuCarrito = async (req, res, next) => {
 }
 
 //validar el email de usuario
-const emailExiste = async (correo) => {
+const emailExiste = async (req, res, next) => {
+    const { correo } = req.body;
     const existeEmail = await Usuario.findOne({correo}) ;
 
     if(existeEmail){
