@@ -28,9 +28,18 @@ const esRolValido = async (rol) => {
         throw new Error(`El rol ${rol} no existe en la base de datos`);
     }
 }
+//validar el email de usuario
+const emailExiste = async (correo) => {
+    const existeEmail = await Usuario.findOne({correo}) ;
+
+    if(existeEmail){
+        throw new Error(`El correo ${correo} ya se encuentra en la base de datos registrado`);
+    }
+}
 
 module.exports = {
     usuarioExiste,
     productoExiste,
-    esRolValido
+    esRolValido,
+    emailExiste
 }
