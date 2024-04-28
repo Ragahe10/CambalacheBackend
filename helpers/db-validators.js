@@ -30,6 +30,9 @@ const esRolValido = async (rol) => {
 }
 //validar el email de usuario
 const emailExiste = async (correo) => {
+    if(!correo){
+        throw new Error('Ingrese un correo');
+    }
     const existeEmail = await Usuario.findOne({correo}) ;
 
     if(existeEmail){
