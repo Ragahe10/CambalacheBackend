@@ -36,7 +36,7 @@ router.post('/',
 
 router.put('/:id',
     [
-        // validarJWT,
+        validarJWT,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('id').custom(usuarioExiste),
         usuarioPermitidoUD,
@@ -46,7 +46,7 @@ router.put('/:id',
 
 router.delete('/:id',
     [
-        // validarJWT,
+        validarJWT,
         check('id' , 'No es un ID Válido').isMongoId(),
         check('id').custom(usuarioExiste),
         usuarioPermitidoUD,
