@@ -11,6 +11,8 @@ const UsuarioSchema = Schema({
     favorito:{type: Schema.Types.ObjectId, ref: 'Favorito'},
     rol: {type: String, required: true, default: 'USER_ROLE'},
     estado: {type: Boolean, default: true},
+    resetToken: {type: String, default: ""}
+    
 });
 
 
