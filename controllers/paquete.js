@@ -41,7 +41,7 @@ const paquetesGet = async (req = request, res = response) => {
 const paqueteGet = async (req = request, res = response) => {
     try {
         const { id } = req.params;
-        const paquete = await Paquete.findById(id).populate('productos.producto', 'nombre')//especificar campos a traer;
+        const paquete = await Paquete.findById(id).populate('productos.producto', 'nombre imagenes precio tipo')//especificar campos a traer;
 
         if (!paquete) {
             return res.status(404).json({ mensaje: "No se encontró el paquete" });
