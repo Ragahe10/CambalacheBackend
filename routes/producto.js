@@ -21,13 +21,7 @@ router.get('/:id',
     ],
     productoGet)
 
-router.get('/',
-    [
-        validarJWT,
-        adminRole,
-        validarCampos
-    ],
-    productosGet)
+router.get('/',productosGet)
 
 
 router.post('/',
