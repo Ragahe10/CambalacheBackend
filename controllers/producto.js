@@ -62,10 +62,16 @@ const productoGet = async (req = request, res = response) => {
     try {
         const { id } = req.params;
         const producto = await Producto.findById(id);
-        res.json({
-            msg: 'Producto obtenido correctamente',
-            producto
-        });
+        if(producto.activo){
+            res.json({
+                msg: 'Producto obtenido correctamente',
+                producto
+            });
+        }else{
+            res.json({
+                msg: 'El producto ya no se encuentra disponible'
+            })
+        }
     } catch (error) {
         console.error('Error al obtener el producto:', error);
         res.status(500).json({ msg: 'Error al obtener el producto' });
