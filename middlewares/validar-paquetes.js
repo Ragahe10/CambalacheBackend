@@ -10,19 +10,19 @@ const paquetesValidos = async (req, res, next) => {
                     const paquete = await Paquete.findById(p.paquete);
                     if (!paquete) {
                         return res.status(401).json({
-                            msj: `El ID ${p.paquete} de paquete no existe`
+                            msg: `El ID ${p.paquete} de paquete no existe`
                         });
                     }
                 } catch (error) {
                     console.error("Error al buscar el paquete:", error);
-                    return res.status(500).json({ mensaje: "Error interno del servidor" });
+                    return res.status(500).json({ msg: "Error interno del servidor" });
                 }
             }
         }
         next();
     } catch (error) {
         console.error("Error al validar paquetes:", error);
-        res.status(500).json({ mensaje: "Error interno del servidor" });
+        res.status(500).json({ msg: "Error interno del servidor" });
     }
 }
 
@@ -35,12 +35,12 @@ const nombrePaqueteExiste = async (req, res, next) => {
     if(!id){
         if (existePaquete) {
             return res.status(401).json({
-                msj:`El nombre "${nombre}" ya está en uso.`});
+                msg:`El nombre "${nombre}" ya está en uso.`});
         }
     } else{
         if (existePaquete && existePaquete!=id) {
             return res.status(401).json({
-                msj:`El nombre "${nombre}" ya está en uso.`});
+                msg:`El nombre "${nombre}" ya está en uso.`});
         }
     }
 

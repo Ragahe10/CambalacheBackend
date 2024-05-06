@@ -19,7 +19,7 @@ const esCategoriaValido = async (req, res, next) => {
 
     if(!existeCategoria){
         return res.status(401).json({
-            mgs: `La categoria ${categoria} no existe en la base de datos`});
+            msg: `La categoria ${categoria} no existe en la base de datos`});
     }
     next();
 }
