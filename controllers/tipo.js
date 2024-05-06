@@ -7,7 +7,7 @@ const tiposGet = async (req = request, res = response) => {
         const query = { estado: true };
         const [total, tipos] = await Promise.all([
             Tipo.countDocuments(query),
-            Tipo.find(query).skip(desde).limit(limite)
+            Tipo.find()
         ]);
         res.json({
             msg: 'Tipos obtenidos correctamente',
