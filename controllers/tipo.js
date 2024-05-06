@@ -3,10 +3,10 @@ const Tipo = require('../models/tipo');
 
 const tiposGet = async (req = request, res = response) => {
     try {
-        const { desde = 0, limite = 10 } = req.query;
-        const query = { estado: true };
+        // const { desde = 0, limite = 10 } = req.query;
+        // const query = { estado: true };
         const [total, tipos] = await Promise.all([
-            Tipo.countDocuments(query),
+            Tipo.countDocuments(),
             Tipo.find()
         ]);
         res.json({
