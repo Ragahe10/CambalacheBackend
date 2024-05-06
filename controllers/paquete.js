@@ -10,13 +10,13 @@ const paquetesActivosGet = async (req, res) => {
         ]);
 
         res.json({
-            mensaje: "Paquetes obtenidos",
+            msg: "Paquetes obtenidos",
             total,
             paquetes //comentar posteriormente
         });
     } catch (error) { // 500 error de servidor
         console.error("Error al obtener paquetes activos:", error);
-        res.status(500).json({ mensaje: "Error al obtener paquetes activos" });
+        res.status(500).json({ msg: "Error al obtener paquetes activos" });
     }
 }
 
@@ -28,13 +28,13 @@ const paquetesGet = async (req = request, res = response) => {
         ]);
 
         res.json({
-            mensaje: "Paquetes obtenidos",
+            msg: "Paquetes obtenidos",
             total,
             paquetes 
         });
     } catch (error) { // 500 error de servidor
         console.error("Error al obtener todos los paquetes:", error);
-        res.status(500).json({ mensaje: "Error al obtener todos los paquetes" });
+        res.status(500).json({ msg: "Error al obtener todos los paquetes" });
     }
 }
 
@@ -44,16 +44,16 @@ const paqueteGet = async (req = request, res = response) => {
         const paquete = await Paquete.findById(id).populate('productos.producto', 'nombre imagenes precio tipo')//especificar campos a traer;
 
         if (!paquete) {
-            return res.status(404).json({ mensaje: "No se encontró el paquete" });
+            return res.status(404).json({ msg: "No se encontró el paquete" });
         }
 
         res.json({
-            mensaje: "Paquete obtenido",
+            msg: "Paquete obtenido",
             paquete
         });
     } catch (error) { // 500 error de servidor
         console.error("Error al obtener el paquete:", error);
-        res.status(500).json({ mensaje: "Error al obtener el paquete" });
+        res.status(500).json({ msg: "Error al obtener el paquete" });
     }
 }
 
@@ -104,13 +104,13 @@ const paqueteDelete = async (req = request, res = response) => {
         const paquete = await Paquete.findByIdAndDelete(id);
 
         if (!paquete) {
-            return res.status(404).json({ mensaje: 'No se encontró el paquete para eliminar' });
+            return res.status(404).json({ msg: 'No se encontró el paquete para eliminar' });
         }
 
-        res.json({ mensaje: 'Paquete eliminado correctamente', paquete });
+        res.json({ msg: 'Paquete eliminado correctamente', paquete });
     } catch (error) { // 500 error de servidor
         console.error("Error al eliminar el paquete:", error);
-        res.status(500).json({ mensaje: "Error al eliminar el paquete" });
+        res.status(500).json({ msg: "Error al eliminar el paquete" });
     }
 }
 
