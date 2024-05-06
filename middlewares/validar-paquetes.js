@@ -31,7 +31,7 @@ const nombrePaqueteExiste = async (req, res, next) => {
     const nombre = req.body.nombre.toUpperCase();
     const existePaquete = await Paquete.findOne({ nombre });
 
-    const id = req.params;
+    const {id} = req.params;
     if(!id){
         if (existePaquete) {
             return res.status(401).json({

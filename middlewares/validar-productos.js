@@ -30,9 +30,17 @@ const nombreProductoExiste = async (req, res, next) => {
     const nombre = req.body.nombre.toUpperCase();
     const existeProducto = await Producto.findOne({ nombre });
 
-    if (existeProducto) {
-        return res.status(401).json({
-            msj:`El nombre "${nombre}" ya está en uso.`});
+    const {id} = req.params;
+    if(!id){
+        if (existeProducto) {
+            return res.status(401).json({
+                msg:`El nombre "${nombre}" ya está en uso.`});
+        }
+    } else{
+        if (existeProducto.id!=id) {
+            return res.status(401).json({
+                msg:`El nombre "${nombre}" ya está en uso.`});
+        }
     }
     next();
 }
