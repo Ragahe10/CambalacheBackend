@@ -14,7 +14,7 @@ const tipoExiste = async (req, res, next) => {
     const tipo = req.body.tipo.toUpperCase();
     const existeTipo = await Tipo.findOne({tipo});
 
-    if(!existeTipo){
+    if(existeTipo){
         return res.status(401).json({
             msg:`EL tipo ${tipo} ya está registrado`});
     }

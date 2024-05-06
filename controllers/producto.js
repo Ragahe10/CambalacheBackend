@@ -93,6 +93,23 @@ const productosPut = async (req = request, res = response) => {
     }
 };
 
+const productosDeleteEstado = async (req = request, res = response) => {
+    try {
+        const { id } = req.params;
+        const producto = await Producto.findById(id);
+        if (!producto) {
+            return res.json({ msg: 'El producto no existe' });
+        }
+        const productoDesactivado = await Producto.findByIdAndUpdate(id, { activo: !producto.activo }, { new: true });
+        res.json({
+            msg: 'Producto desactivado con éxito',
+            productoDesactivado
+        });
+    } catch (error) {
+        console.error('Error al desactivar el producto:', error);
+        res.status(500).json({ msg: 'Error al desactivar el producto' });
+    }
+};
 const productosDelete = async (req = request, res = response) => {
     try {
         const { id } = req.params;
@@ -100,9 +117,9 @@ const productosDelete = async (req = request, res = response) => {
         if (!producto.activo) {
             return res.json({ msg: 'El producto no existe' });
         }
-        const productoDesactivado = await Producto.findByIdAndUpdate(id, { activo: false }, { new: true });
+        const productoDesactivado = await Producto.findByIdAndDelete(id, { activo: false }, { new: true });
         res.json({
-            msg: 'Producto desactivado con éxito',
+            msg: 'Producto borrado con éxito',
             productoDesactivado
         });
     } catch (error) {
@@ -117,4 +134,6 @@ module.exports = {
     productosActivosGet, 
     productoGet, 
     productosPut, 
-    productosDelete };
+    productosDelete, 
+    productosDeleteEstado 
+};

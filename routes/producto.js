@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { productosPost, productosGet, productosActivosGet, productoGet, productosPut, productosDelete } = require('../controllers/producto');
+const { productosPost, productosGet, productosActivosGet, productoGet, productosPut, productosDelete, productosDeleteEstado } = require('../controllers/producto');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const {check} = require('express-validator');
 const { adminRole } = require('../middlewares/validar-usuario');
@@ -52,6 +52,15 @@ router.put('/:id',
     ],
     productosPut)
 
+router.delete('/Estado/:id',
+    [
+        validarJWT,
+        adminRole,
+        check('id' , 'No es un ID Válido').isMongoId(),
+        check('id').custom(productoExiste),
+        validarCampos
+    ],
+    productosDeleteEstado)
 router.delete('/:id',
     [
         validarJWT,
