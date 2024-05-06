@@ -68,12 +68,12 @@ const paquetePost = async (req = request, res = response) => {
         await paquete.save();
 
         res.json({
-            mensaje: "Paquete creado",
+            msg: "Paquete creado",
             paquete
         });
     } catch (error) { // 500 error de servidor
         console.error("Error al crear el paquete:", error);
-        res.status(500).json({ mensaje: "Error al crear el paquete" });
+        res.status(500).json({ msg: "Error al crear el paquete" });
     }
 }
 
