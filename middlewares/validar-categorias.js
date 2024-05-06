@@ -7,7 +7,7 @@ const categoriaExiste = async (req, res, next) => {
 
     if(existeCategoria){
         return res.status(401).json({
-            mgs: `la categoría ${categoria} ya está registrada`});
+            msg: `la categoría ${categoria} ya está registrada`});
     }
     next();
 }

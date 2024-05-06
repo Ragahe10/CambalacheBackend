@@ -3,11 +3,11 @@ const Categoria = require('../models/categoria');
 
 const categoriasGet = async (req = request, res = response) => {
     try {
-        const { desde = 0, limite = 10 } = req.query;
-        const query = { estado: true };
+        // const { desde = 0, limite = 10 } = req.query;
+        // const query = { estado: true };
         const [total, categorias] = await Promise.all([
-            Categoria.countDocuments(query),
-            Categoria.find(query).skip(desde).limit(limite)
+            Categoria.countDocuments(),
+            Categoria.find()
         ]);
         res.json({
             msg: 'Categorías obtenidas correctamente',

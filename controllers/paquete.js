@@ -85,16 +85,16 @@ const paquetePut = async (req = request, res = response) => {
         const paquete = await Paquete.findByIdAndUpdate(id, {descripcion, precio, productos, categoria, nombre}, { new: true });
 
         if (!paquete) {
-            return res.status(404).json({ mensaje: "No se encontró el paquete para actualizar" });
+            return res.status(404).json({ msg: "No se encontró el paquete para actualizar" });
         }
 
         res.json({
-            mensaje: "Se actualizó el paquete",
+            msg: "Se actualizó el paquete",
             paquete
         });
     } catch (error) { // 500 error de servidor
         console.error("Error al actualizar el paquete:", error);
-        res.status(500).json({ mensaje: "Error al actualizar el paquete" });
+        res.status(500).json({ msg: "Error al actualizar el paquete" });
     }
 }
 
