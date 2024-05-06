@@ -6,7 +6,7 @@ const paquetesActivosGet = async (req, res) => {
         const query = { estado: true }; // filtro de consulta
         const [total, paquetes] = await Promise.all([
             Paquete.countDocuments(query),// cantidad de elementos
-            Paquete.find(query).populate('productos.producto', 'nombre')//especificar campos a traer
+            Paquete.find(query).populate('productos.producto', 'nombre imagenes precio tipo')//especificar campos a traer
         ]);
 
         res.json({
@@ -24,7 +24,7 @@ const paquetesGet = async (req = request, res = response) => {
     try {
         const [total, paquetes] = await Promise.all([
             Paquete.countDocuments(),
-            Paquete.find().populate('productos.producto', 'nombre')//especificar campos a traer
+            Paquete.find().populate('productos.producto', 'nombre imagenes precio tipo')//especificar campos a traer
         ]);
 
         res.json({
