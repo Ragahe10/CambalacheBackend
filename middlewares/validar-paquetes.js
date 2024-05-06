@@ -38,7 +38,7 @@ const nombrePaqueteExiste = async (req, res, next) => {
                 msg:`El nombre "${nombre}" ya está en uso.`});
         }
     } else{
-        if (existePaquete && existePaquete.id!=id) {
+        if (existePaquete.id!=id) {
             return res.status(401).json({
                 msg:`El nombre "${nombre}" ya está en uso.`});
         }
